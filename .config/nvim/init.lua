@@ -1,4 +1,2 @@
 require("config.lazy")
-
-
-vim.o.mouse=a
+require("config.options")

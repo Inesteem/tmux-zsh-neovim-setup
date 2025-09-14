@@ -1,9 +1,19 @@
 # ignore everything
 *
 
-# but not these files
+# do not ignore these files explicitly
 !.gitignore
 !.tmux.conf
 !.zshrc
-!.config/nvim/*
-!.config/zsh/*
+!.stylua
+!.clang-format
+
+# unignore the .config directory
+!.config/
+!.config/zsh/
+!.config/nvim/
+
+# recursively unignore everything inside .config
+!.config/zsh/**
+!.config/nvim/**
+
