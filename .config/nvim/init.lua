@@ -1,4 +1,4 @@
 require("config.lazy")
-require("mason").setup()
 
 
+vim.o.mouse=a
