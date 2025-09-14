@@ -45,3 +45,5 @@ vim.o.updatetime = 250 -- Faster completion and CursorHold events (ms)
 
 -- Enable syntax highlighting (modern Neovim usually handles this automatically)
 vim.cmd("syntax enable")
+
+vim.g.mapleader = "<Space>"
