@@ -1,24 +1,24 @@
 return {
 	"stevearc/conform.nvim",
-	event = { "BufReadPre", "BufNewFile" }, -- lazy load when opening files
+	event = { "BufWritePre" },
 	config = function()
 		require("conform").setup({
 			formatters_by_ft = {
-				python = { "isort", "black" },
-				lua = { "stylua" },
+				json = { "prettier" },
+				markdown = { "mdformat" },
+				c = { "clang_format" },
 				cpp = { "clang-format" },
+				javascript = { "prettier" },
+				lua = { "stylua" },
+				proto = { "protofmt" },
+				python = { "isort", "black" },
+				typescript = { "prettier" },
 			},
 			format_on_save = {
-				timeout_ms = 500,
+				async = false,
+				timeout_ms = 1000,
 				lsp_format = "fallback",
 			},
-		})
-
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			callback = function()
-				require("conform").format({ async = false })
-			end,
-			pattern = "*",
 		})
 	end,
 }
