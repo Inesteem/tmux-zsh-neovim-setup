@@ -35,13 +35,22 @@ Intended to be copied to your HOME folder.
   - `.tmux.conf` for a powerful terminal workflow.
 
 
-## Getting Started
+## Dependencies
 
+You should have make, python3, neovim, tmux, clangd, zsh and oh-my-zsh installed on your system.
+
+In your python3 environment, install isort, black, neovim and pynvim.
+
+Also, nerd fonts should be downloaded and setup in iterm to be used as default font.
+Some symbols might be weird otherwise.
+
+## Getting Started
 1. Clone the repository.
 2. Symlink or copy `.config/nvim` into your home directory.
 3. Launch Neovim—Lazy.nvim will take care of plugin installation.
 4. Adjust `options.lua`, `keymaps.lua`, or add your own plugins as needed for further customization.
-5. Enjoy a state-of-the-art coding environment for Python and C++ development!
+5. Install some system dependencies I for sure forgot to mention here
+6. Enjoy a state-of-the-art coding environment for Python and C++ development!
 
 ---
 

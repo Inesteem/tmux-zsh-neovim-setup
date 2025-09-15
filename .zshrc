@@ -73,6 +73,7 @@ ZSH_THEME="robbyrussell"
 plugins=(
   git
   vi-mode
+  per-directory-history
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -106,7 +107,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source ~/.config/zsh/per-directory-history.zsh
 source ~/.config/zsh/user-config.zsh
 
 bindkey -v
