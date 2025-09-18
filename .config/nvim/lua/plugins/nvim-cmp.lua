@@ -8,11 +8,21 @@ return {
 		"hrsh7th/cmp-nvim-lua", -- Shows nvim api in completion menu
 		"hrsh7th/cmp-path", -- filesystem path completions
 		"saadparwaiz1/cmp_luasnip", -- snippet completions
+		"windwp/nvim-autopairs", -- Automatic pairs
 	},
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 
+		local npairs = require("nvim-autopairs")
+		local Rule = require("nvim-autopairs.rule")
+		local cond = require("nvim-autopairs.conds")
+		npairs.setup()
+		npairs.add_rules({
+			Rule("{:", ":}", "norg"):with_pair(cond.after_text("}")):replace_endpair(function()
+				return ":"
+			end),
+		})
 		cmp.setup({
 			snippet = {
 				expand = function(args)

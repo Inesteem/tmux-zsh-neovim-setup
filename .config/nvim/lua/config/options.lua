@@ -46,7 +46,7 @@ vim.o.updatetime = 250 -- Faster completion and CursorHold events (ms)
 -- Enable syntax highlighting (modern Neovim usually handles this automatically)
 vim.cmd("syntax enable")
 
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- This line is disabling the spacebar in Normal and Visual modes by
 -- mapping it to do nothing (<Nop>). This is typically done to prepare
 -- the spacebar for use as a "leader" key for custom keybindings.
@@ -56,33 +56,31 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = "<Space>"
 vim.g.maplocalleader = "<Space>"
 
-
 -- [[ Basic Keymaps ]]
 
 -- Custom useful commands
 
--- switch between .h and .cc/.cpp files 
-vim.api.nvim_create_user_command('HeaderToSource', function()
+-- switch between .h and .cc/.cpp files
+vim.api.nvim_create_user_command("HeaderToSource", function()
 	local current = vim.api.nvim_buf_get_name(0)
 	local new
-	if current:match('%.h$') then
-		new = current:gsub('%.h$', '.cc')
+	if current:match("%.h$") then
+		new = current:gsub("%.h$", ".cc")
 		if vim.fn.filereadable(new) == 0 then
-			new = current:gsub('%.h$', '.cpp') -- fallback to .cpp if .cc doesn't exist
+			new = current:gsub("%.h$", ".cpp") -- fallback to .cpp if .cc doesn't exist
 		end
-	elseif current:match('%.cc$') or current:match('%.cpp$') then
-		new = current:gsub('%.cc$', '.h'):gsub('%.cpp$', '.h')
+	elseif current:match("%.cc$") or current:match("%.cpp$") then
+		new = current:gsub("%.cc$", ".h"):gsub("%.cpp$", ".h")
 	else
 		print('[Not a ".h", ".cc", or ".cpp" buffer]')
 		return
 	end
-	vim.cmd('edit ' .. new)
-end, { desc = 'Toggle between header and source files' })
+	vim.cmd("edit " .. new)
+end, { desc = "Toggle between header and source files" })
 
 vim.cmd([[ nnoremap <leader>th :HeaderToSource<CR> ]])
 
-
 -- Copy current relative path of file
-vim.keymap.set('n', '<leader>cp', function()
-	vim.fn.setreg('+', vim.fn.expand('%'))
-end, { desc = 'Copy relative file path to clipboard' })
+vim.keymap.set("n", "<leader>cp", function()
+	vim.fn.setreg("+", vim.fn.expand("%"))
+end, { desc = "Copy relative file path to clipboard" })
