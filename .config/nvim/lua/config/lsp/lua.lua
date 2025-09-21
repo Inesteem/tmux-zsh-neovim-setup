@@ -1,11 +1,9 @@
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-local utils = require("utils")
 
 vim.lsp.config.lua = {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
 	capabilities = lsp_capabilities,
-	--on_attach = utils.on_attach,
 	root_markers = {
 		".luarc.json",
 		".luarc.jsonc",

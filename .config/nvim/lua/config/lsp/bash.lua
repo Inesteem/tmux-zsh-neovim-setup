@@ -6,5 +6,4 @@ vim.lsp.config.bash = {
 		".git",
 	},
 }
-
 vim.lsp.enable("bash")

@@ -5,7 +5,6 @@ vim.lsp.config.python = {
 	cmd = { "pyright-langserver", "--stdio" },
 	filetypes = { "python" },
 	capabilities = lsp_capabilities,
-	--on_attach = utils.on_attach,
 	root_markers = {
 		"pyproject.toml",
 		"setup.py",

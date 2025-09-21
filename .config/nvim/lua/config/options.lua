@@ -84,3 +84,14 @@ vim.cmd([[ nnoremap <leader>th :HeaderToSource<CR> ]])
 vim.keymap.set("n", "<leader>cp", function()
 	vim.fn.setreg("+", vim.fn.expand("%"))
 end, { desc = "Copy relative file path to clipboard" })
+
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+
+-- Override border styling for hover window globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+	opts = opts or {}
+	opts.border = opts.border or "rounded"
+	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end

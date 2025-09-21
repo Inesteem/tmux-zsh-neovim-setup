@@ -2,6 +2,15 @@ local utils = require("utils")
 
 local function set_global_keymaps(client, bufnr)
 	local conform = require("conform")
+
+	-- Show hover information
+	utils.set_keymap({
+		key = "K",
+		cmd = vim.lsp.buf.hover,
+		desc = "Show hover information",
+		bufnr = bufnr,
+	})
+
 	utils.set_keymap({
 		key = "gq",
 		cmd = function()
@@ -18,6 +27,14 @@ local function set_global_keymaps(client, bufnr)
 		bufnr = bufnr,
 	})
 
+	utils.set_keymap({
+		key = "gd",
+		cmd = vim.lsp.buf.definition,
+		--	cmd = ":tab split | <cmd>lua vim.lsp.buf.definition()<CR>",
+		desc = "Go to definition",
+		bufnr = bufnr,
+	})
+
 	-- Go to definition
 	utils.set_keymap({
 		key = "<leader>gd",
@@ -25,17 +42,14 @@ local function set_global_keymaps(client, bufnr)
 		desc = "Go to definition",
 		bufnr = bufnr,
 	})
-	utils.set_keymap({
-		key = "gd",
-		cmd = vim.lsp.buf.definition,
-		desc = "Go to definition",
-		bufnr = bufnr,
-	})
 
 	-- Go to type definition
 	utils.set_keymap({
 		key = "<leader>gt",
+		-- key = "go",
 		cmd = ":Telescope lsp_type_definitions<CR>",
+		--	cmd = ":tab split | <cmd>lua vim.lsp.buf.type_definition()<CR>",
+		--	cmd = vim.lsp.buf.type_definition,
 		desc = "Go to type definition",
 		bufnr = bufnr,
 	})
@@ -45,6 +59,7 @@ local function set_global_keymaps(client, bufnr)
 		utils.set_keymap({
 			key = "gD",
 			cmd = vim.lsp.buf.declaration,
+			--		cmd = ":tab split | <cmd>lua vim.lsp.buf.declaration()<CR>",
 			desc = "Go to declaration",
 			bufnr = bufnr,
 		})
@@ -63,18 +78,13 @@ local function set_global_keymaps(client, bufnr)
 		desc = "Show diagnostic information in hover.",
 		bufnr = bufnr,
 	})
-	-- Show hover information
-	utils.set_keymap({
-		key = "K",
-		cmd = vim.lsp.buf.hover,
-		desc = "Show hover information",
-		bufnr = bufnr,
-	})
 
 	-- Go to implementation
 	utils.set_keymap({
 		key = "gi",
 		cmd = ":Telescope lsp_implementations<CR>",
+		--	cmd = ":tab split | <cmd>lua vim.lsp.buf.implementation()<CR>",
+		--	cmd = vim.lsp.buf.implementation,
 		desc = "Go to implementation",
 		bufnr = bufnr,
 	})
@@ -107,6 +117,7 @@ local function set_global_keymaps(client, bufnr)
 	utils.set_keymap({
 		key = "gr",
 		cmd = ":Telescope lsp_references<CR>",
+		--	cmd = vim.lsp.buf.references,
 		desc = "Go to references",
 		bufnr = bufnr,
 	})
@@ -122,9 +133,10 @@ local function set_global_keymaps(client, bufnr)
 	-- Go to previous diagnostic
 	utils.set_keymap({
 		key = "[d",
-		cmd = function()
-			vim.diagnostic.jump({ count = -1 })
-		end,
+		--		cmd = function()
+		--			vim.diagnostic.jump({ count = -1 })
+		--		end,
+		cmd = vim.diagnostic.goto_prev,
 		desc = "Go to previous diagnostic",
 		bufnr = bufnr,
 	})
@@ -132,9 +144,10 @@ local function set_global_keymaps(client, bufnr)
 	-- Go to next diagnostic
 	utils.set_keymap({
 		key = "]d",
-		cmd = function()
-			vim.diagnostic.jump({ count = 1 })
-		end,
+		cmd = vim.diagnostic.goto_next,
+		--		cmd = function()
+		--			vim.diagnostic.jump({ count = 1 })
+		--		end,
 		desc = "Go to next diagnostic",
 		bufnr = bufnr,
 	})
@@ -170,52 +183,6 @@ local function configure_diagnostics()
 		},
 	})
 end
-
---vim.api.nvim_create_autocmd("LspAttach", {
---	desc = "LSP actions",
---	callback = function()
---		local bufmap = function(mode, lhs, rhs)
---			local opts = { buffer = true }
---			vim.keymap.set(mode, lhs, rhs, opts)
---		end
---
---		-- Displays hover information about the symbol under the cursor
---		bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
---
---		-- Jump to the definition
---		bufmap("n", "gd", ":tab split | <cmd>lua vim.lsp.buf.definition()<cr>")
---
---		-- Jump to declaration
---		bufmap("n", "gD", ":tab split | <cmd>lua vim.lsp.buf.declaration()<cr>")
---
---		-- Lists all the implementations for the symbol under the cursor
---		bufmap("n", "gi", ":tab split | <cmd>lua vim.lsp.buf.implementation()<cr>")
---
---		-- Jumps to the definition of the type symbol
---		bufmap("n", "og", ":tab split | <cmd>lua vim.lsp.buf.type_definition()<cr>")
---
---		-- Lists all the references
---		bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
---
---		-- Displays a function's signature information
---		bufmap("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
---
---		-- Renames all references to the symbol under the cursor
---		bufmap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
---
---		-- Selects a code action available at the current cursor position
---		bufmap("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
---
---		-- Show diagnostics in a floating window
---		bufmap("n", "gll", "<cmd>lua vim.diagnostic.open_float()<cr>")
---
---		-- Move to the previous diagnostic
---		bufmap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
---
---		-- Move to the next diagnostic
---		bufmap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
---	end,
---})
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("global.lsp", { clear = true }),
