@@ -19,6 +19,7 @@ return {
 		local npairs = require("nvim-autopairs")
 		local Rule = require("nvim-autopairs.rule")
 		local cond = require("nvim-autopairs.conds")
+		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		local select_opts = { behavior = cmp.SelectBehavior.Select }
 		npairs.setup()
 		npairs.add_rules({
@@ -26,6 +27,7 @@ return {
 				return ":"
 			end),
 		})
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 		cmp.setup.filetype("gitcommit", {
 			sources = cmp.config.sources({
@@ -42,6 +44,21 @@ return {
 				{ name = "buffer" },
 			},
 		})
+		-- `:` cmdline setup.
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{
+					name = "cmdline",
+					option = {
+						ignore_cmds = { "Man", "!" },
+					},
+				},
+			}),
+		})
+
 		-- Styling
 		vim.opt.winhighlight = cmp.config.window.bordered().winhighlight -- Hover window looks nice
 		vim.diagnostic.config({
