@@ -38,10 +38,15 @@ Intended to be copied to your HOME folder.
 
 You should have make, python3, neovim, tmux, clangd, zsh and oh-my-zsh installed on your system.
 
+Setup a virtual python3 env in ~/env (see https://docs.python.org/3/library/venv.html).
 In your python3 environment, install isort, black, neovim and pynvim.
 
 Also, nerd fonts should be downloaded and setup in iterm to be used as default font.
 Some symbols might be weird otherwise.
+
+sudo npm i -g vscode-json-languageserver
+sudo npm i -g bash-language-serve
+
 
 ## Getting Started
 1. Clone the repository into your home directory.
