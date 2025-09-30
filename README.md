@@ -45,7 +45,8 @@ Also, nerd fonts should be downloaded and setup in iterm to be used as default f
 Some symbols might be weird otherwise.
 
 sudo npm i -g vscode-json-languageserver
-sudo npm i -g bash-language-serve
+
+sudo npm i -g bash-language-server
 
 
 ## Getting Started
