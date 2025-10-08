@@ -11,7 +11,8 @@ return {
 				javascript = { "prettier" },
 				lua = { "stylua" },
 				proto = { "protofmt" },
-				python = { "isort", "black" },
+				python = { "black", "isort" },
+				--python = { "isort", "black" },
 				typescript = { "prettier" },
 			},
 			format_on_save = {

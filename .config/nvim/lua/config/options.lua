@@ -46,16 +46,6 @@ vim.o.updatetime = 250 -- Faster completion and CursorHold events (ms)
 -- Enable syntax highlighting (modern Neovim usually handles this automatically)
 vim.cmd("syntax enable")
 
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
--- This line is disabling the spacebar in Normal and Visual modes by
--- mapping it to do nothing (<Nop>). This is typically done to prepare
--- the spacebar for use as a "leader" key for custom keybindings.
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = "<Space>"
-vim.g.maplocalleader = "<Space>"
-
 -- [[ Basic Keymaps ]]
 
 -- Custom useful commands
@@ -87,7 +77,6 @@ end, { desc = "Copy relative file path to clipboard" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
-
 -- Override border styling for hover window globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -95,3 +84,12 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 	opts.border = opts.border or "rounded"
 	return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
+
+local function map(mode, lhs, rhs, opts)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
+end
+map("n", "gf", "<C-W>gf")

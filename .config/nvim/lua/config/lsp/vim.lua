@@ -1,6 +1,6 @@
 vim.lsp.config.vim = {
 	filetypes = { "lua" },
-	cmd = { "vim-language-server", "start" },
+	cmd = { "vim-language-server", "start", "--stdio" },
 	root_markers = {
 		".git",
 	},
