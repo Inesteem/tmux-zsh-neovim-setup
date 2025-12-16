@@ -1,0 +1,23 @@
+# ignore everything
+*
+
+# do not ignore these files explicitly
+!.gitignore
+!.tmux.conf
+!.zshrc
+!.stylua
+!.clang-format
+!README.md
+
+# unignore the .config directory
+!.config/
+!.config/zsh/
+!.config/nvim/
+
+# recursively unignore everything inside .config
+!.config/zsh/**
+!.config/nvim/**
+
+
+# But ignore
+lazy-lock.json
