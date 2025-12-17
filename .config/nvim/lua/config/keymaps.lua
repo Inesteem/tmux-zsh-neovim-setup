@@ -14,5 +14,9 @@ vim.keymap.set("n", "<leader>th", "<cmd>HeaderToSource<CR>", { desc = "Toggle be
 
 -- Copy current relative path of file
 vim.keymap.set("n", "<leader>cp", function()
-	vim.fn.setreg("+", vim.fn.expand("%"))
+	local path = vim.fn.expand("%")
+	vim.fn.setreg("+", path)
+	vim.fn.setreg("*", path)
+	vim.fn.setreg('"', path)
+	vim.notify("Copied relative path: " .. path)
 end, { desc = "Copy relative file path to clipboard" })

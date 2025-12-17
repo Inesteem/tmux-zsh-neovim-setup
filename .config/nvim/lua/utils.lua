@@ -42,7 +42,10 @@ function utils.smart_find_file()
 
 		-- Use Telescope to find the file
 		local actions = require("telescope.actions")
-		require("telescope.builtin").find_files({
+		local telescope = require("telescope")
+		local search_func = telescope.extensions.frecency and telescope.extensions.frecency.frecency or require("telescope.builtin").find_files
+
+		search_func({
 			default_text = query,
 			attach_mappings = function(prompt_bufnr, map)
 				map({ "i", "n" }, "<CR>", actions.select_tab)

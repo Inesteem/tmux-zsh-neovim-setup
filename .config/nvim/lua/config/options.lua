@@ -29,7 +29,10 @@ vim.o.undofile = true -- Enable persistent undo
 -- vim.o.writebackup = false -- Disable backup before overwriting files
 
 -- Clipboard and mouse
-vim.o.clipboard = "unnamedplus" -- Use system clipboard for all operations
+-- Only enable system clipboard if a provider is available to prevent errors
+if vim.fn.executable("xclip") == 1 or vim.fn.executable("xsel") == 1 or vim.fn.executable("wl-copy") == 1 then
+  vim.o.clipboard = "unnamedplus"
+end
 vim.o.mouse = "a"               -- Enable mouse support in all modes
 
 -- Splits
@@ -53,8 +56,8 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = "<Space>"
-vim.g.maplocalleader = "<Space>"
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- [[ Basic Keymaps ]]
 

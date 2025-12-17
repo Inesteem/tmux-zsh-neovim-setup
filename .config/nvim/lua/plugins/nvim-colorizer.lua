@@ -13,5 +13,6 @@ return {
 				rgb_fn = true,
 			},
 		})
+		vim.cmd("ColorizerAttachToBuffer")
 	end,
 }
