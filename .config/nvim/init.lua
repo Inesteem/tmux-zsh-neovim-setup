@@ -19,5 +19,7 @@ end
 -- for virtual envs
 vim.g.python3_host_prog = vim.fn.expand("~/env/bin/python3")
 
-vim.cmd('source /usr/share/vim/google/google.vim')
+if vim.fn.filereadable("/usr/share/vim/google/google.vim") == 1 then
+  vim.cmd("source /usr/share/vim/google/google.vim")
+end
 
