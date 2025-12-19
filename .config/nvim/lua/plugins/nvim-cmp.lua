@@ -45,8 +45,27 @@ return {
 			},
 		})
 		-- `:` cmdline setup.
+		local cmdline_mappings = cmp.mapping.preset.cmdline()
+		-- Manually handle '%' expansion because nvim-cmp overrides the default <Tab> behavior.
+		-- If '%' is present, we replace it with the current file path; otherwise, we use cmp completion.
+		cmdline_mappings["<Tab>"] = {
+			c = function(fallback)
+				local cmd = vim.fn.getcmdline()
+				if cmd:find("%%") then
+					cmp.close()
+					local expanded = cmd:gsub("%%", vim.fn.expand("%"))
+					vim.fn.setcmdline(expanded)
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<End>", true, false, true), "n", false)
+				elseif cmp.visible() then
+					cmp.select_next_item()
+				else
+					cmp.complete()
+				end
+			end,
+		}
+
 		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
+			mapping = cmdline_mappings,
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {

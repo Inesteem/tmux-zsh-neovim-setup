@@ -31,6 +31,12 @@ return {
           },
         },
       },
+      extensions = {
+        frecency = {
+          show_unindexed = true,
+          default_workspace = "CWD",
+        },
+      },
     })
   end,
 }
