@@ -32,6 +32,11 @@ function utils.smart_find_file()
 		vim.cmd("tabclose")
 
 		local query = vim.fn.expand("<cfile>")
+		-- Remove trailing slash
+		query = query:gsub("/$", "")
+		-- Remove leading slash to make it relative
+		query = query:gsub("^/", "")
+
 		if query:match("^[a-zA-Z0-9_.]+$") and not query:match("/") then
 			query = query:gsub("%.", "/")
 		end
