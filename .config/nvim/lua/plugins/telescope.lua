@@ -15,11 +15,6 @@ return {
     { "<leader>gbc", "<cmd>Telescope git_bcommits<cr>", desc = "Git buffer commits" },
   },
   config = function()
-    -- Load fzf extension if installed
-    pcall(require("telescope").load_extension, "fzf")
-    -- Load frecency extension
-    pcall(require("telescope").load_extension, "frecency")
-
     require("telescope").setup({
       defaults = {
         wrap_results = true,
@@ -38,5 +33,10 @@ return {
         },
       },
     })
+
+    -- Load fzf extension if installed
+    pcall(require("telescope").load_extension, "fzf")
+    -- Load frecency extension
+    pcall(require("telescope").load_extension, "frecency")
   end,
 }
